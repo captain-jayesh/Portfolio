@@ -81,6 +81,33 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+let isThrottled = false;
+
+window.addEventListener('scroll', () => {
+    if (!isThrottled) {
+        isThrottled = true;
+
+        setTimeout(() => {
+            let currentScroll = window.scrollY;
+
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop - 60;
+                const sectionHeight = section.clientHeight;
+
+                if (currentScroll >= sectionTop && currentScroll < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    navLinks[index].classList.add('active');
+                }
+            });
+
+            isThrottled = false;
+        }, 100); // Adjust time delay as needed
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Code for smooth scroll, active class, hamburger menu, etc.
+});
 
 // ab.addEventListener("click",(e) => {
 //     e.target.style.color = "#fff";
