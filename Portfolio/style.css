@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body{
 font-family: "Open Sans", sans-serif;
    padding-top: 0;
@@ -22,10 +26,31 @@ font-family: "Open Sans", sans-serif;
 
 }
 
-#pic{
+.nav-item a:focus {
+    outline: 2px solid #bd5d38; /* Focus outline for accessibility */
+}
+
+#sideNav ul li a:focus {
+    outline: 2px solid #bd5d38;
+}
+
+.nav-item a.active {
+    color: white !important;
+    font-weight: bold; /* Makes active link stand out */
+}
+
+.nav-item a:hover {
+    color: rgba(255, 255, 255, .9); /* More visible on hover */
+}
+
+
+
+#pic {
     display: flex;
     max-width: 10rem;
     max-height: 10rem;
+    width: 100%;
+    height: auto;
     border: .5rem solid rgba(255,255,255,.2);
     border-radius: 50%;
     margin-top: 9rem;
@@ -33,6 +58,15 @@ font-family: "Open Sans", sans-serif;
     margin-bottom: .5rem;
     background-color: aliceblue;
 }
+
+@media only screen and (max-width: 768px) {
+    #pic {
+        max-width: 7rem;
+        max-height: 7rem;
+        margin-top: 2rem;
+    }
+}
+
 
 #container{
     width: 100%;
@@ -42,6 +76,12 @@ font-family: "Open Sans", sans-serif;
     flex-grow: 0;
     /* background-color: aqua; */
 }
+
+.section {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-radius: 8px; /* Slightly rounded corners */
+}
+
 
 #container > ul{
     list-style-type: none;
@@ -84,6 +124,16 @@ font-family: "Open Sans", sans-serif;
 
 #about > h1 > span{
     color: #bd5d38;
+}
+
+#about h1, #experience h2, #education h2, #skills h2, #interests h2 {
+    font-size: 3.5rem;
+    line-height: 4rem;
+}
+
+#about p, #experience p, #education p, #skills p, #interests p {
+    font-size: 1.15rem;
+    line-height: 1.75rem;
 }
 
 #address{
@@ -331,66 +381,27 @@ font-family: "Open Sans", sans-serif;
 }
 
 @media only screen and (max-width: 768px) {
-    body {
-        padding-left: 0; /* Remove padding on mobile */
-        padding-top: 0;
-    }
-
     #sideNav {
-        left: -100%; /* Hide off-screen */
+        position: fixed;
+        top: 0;
+        left: -100%;
         width: 100%;
-    }
-
-    .hamburger-menu {
-        display: block; /* Show hamburger on mobile */
-    }
-
-    #container ul li {
-        text-align: center;
+        height: 100vh;
+        background-color: #bd5d38;
+        transition: left 0.3s ease; /* Slide transition */
     }
 
     #sideNav.active {
-        left: 0; /* Slide the navbar in */
+        left: 0;
     }
 
-    /* Adjust content section padding for mobile */
-    .section {
-        padding: 3rem 1rem; /* Reduced padding on mobile */
-        min-height: auto; /* Allow sections to fit content */
-        margin: 0; /* Remove margin */
-    }
-
-
-    /* Adjust font sizes for mobile readability */
-    #about h1 {
-        font-size: 3rem; /* Adjust heading size */
-        line-height: 3.5rem;
-    }
-
-    #about p, #experience p, #education p, #skills p, #interests p {
-        font-size: 1rem; /* Make paragraph text smaller */
-        line-height: 1.5rem;
-    }
-
-    #icons li {
-        font-size: 1.5rem;
-    }
-
-    /* Ensure images fit within mobile screen */
-    #pic {
-        max-width: 7rem;
-        max-height: 7rem;
-        margin-top: 2rem;
-    }
-
-    /* Adjust section headings */
-    h2 {
-        font-size: 2.5rem; /* Smaller headings for mobile */
-        line-height: 3rem;
-    }
-
-    /* Reduce spacing between content */
+    /* Smooth transition for items in the sidebar */
     #container ul li {
-        padding: 0.75rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    #sideNav.active ul li {
+        opacity: 1; /* Fade-in items when sidebar is active */
     }
 }
